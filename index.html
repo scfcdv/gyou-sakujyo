@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>行削除</title>
+</head>
+<body>
+    <textarea id="inputText" rows="10" cols="50"></textarea><br>
+    <input type="number" id="numLines" value="10"><br>
+    <select id="direction">
+        <option value="left">左から</option>
+        <option value="right">右から</option>
+    </select><br>
+    <button onclick="removeLines()">削除する</button><br>
+    <textarea id="outputText" rows="10" cols="50"></textarea>
+
+    <script>
+        function removeLines() {
+            var inputText = document.getElementById("inputText").value;
+            var numLines = document.getElementById("numLines").value;
+            var direction = document.getElementById("direction").value;
+            var lines = inputText.split("\n");
+            var outputLines = [];
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i];
+                if (direction === "left") {
+                    if (line.length > numLines) {
+                        outputLines.push(line.substring(numLines));
+                    } else {
+                        outputLines.push("");
+                    }
+                } else if (direction === "right") {
+                    if (line.length > numLines) {
+                        outputLines.push(line.substring(0, line.length - numLines));
+                    } else {
+                        outputLines.push("");
+                    }
+                }
+            }
+            document.getElementById("outputText").value = outputLines.join("\n");
+        }
+    </script>
+</body>
+</html>
